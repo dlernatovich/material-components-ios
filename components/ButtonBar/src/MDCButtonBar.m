@@ -31,7 +31,7 @@ static NSString *const kEnabledSelector = @"enabled";
 
 @implementation MDCButtonBar {
   id _buttonItemsLock;
-  NSArray<UIView *> *_buttonViews;
+  NSArray<__kindof UIView *> *_buttonViews;
   UIColor *_inkColor;
   MDCAppBarButtonBarBuilder *_defaultBuilder;
 }
@@ -265,7 +265,7 @@ static NSString *const kEnabledSelector = @"enabled";
         if (itemIndex == NSNotFound || itemIndex > [self->_buttonViews count]) {
           return;
         }
-        UIView *buttonView = self->_buttonViews[itemIndex];
+        UIButton *button = self->_buttonViews[itemIndex];
 
         id newValue = [object valueForKey:keyPath];
         if (newValue == [NSNull null]) {
@@ -273,44 +273,37 @@ static NSString *const kEnabledSelector = @"enabled";
         }
 
         if ([keyPath isEqualToString:kEnabledSelector]) {
-          if ([buttonView respondsToSelector:@selector(setEnabled:)]) {
-            [buttonView setValue:newValue forKey:keyPath];
+          if ([button respondsToSelector:@selector(setEnabled:)]) {
+            [button setValue:newValue forKey:keyPath];
           }
 
         } else if ([keyPath isEqualToString:NSStringFromSelector(@selector(accessibilityHint))]) {
-          buttonView.accessibilityHint = newValue;
+          button.accessibilityHint = newValue;
 
         } else if ([keyPath
                        isEqualToString:NSStringFromSelector(@selector(accessibilityIdentifier))]) {
-          buttonView.accessibilityIdentifier = newValue;
+          button.accessibilityIdentifier = newValue;
 
         } else if ([keyPath isEqualToString:NSStringFromSelector(@selector(accessibilityLabel))]) {
-          buttonView.accessibilityLabel = newValue;
+          button.accessibilityLabel = newValue;
 
         } else if ([keyPath isEqualToString:NSStringFromSelector(@selector(accessibilityValue))]) {
-          buttonView.accessibilityValue = newValue;
+          button.accessibilityValue = newValue;
 
         } else if ([keyPath isEqualToString:NSStringFromSelector(@selector(image))]) {
-          if ([buttonView isKindOfClass:[UIButton class]]) {
-            [((UIButton *)buttonView) setImage:newValue forState:UIControlStateNormal];
-            [self invalidateIntrinsicContentSize];
-          }
+          [button setImage:newValue forState:UIControlStateNormal];
+          [self invalidateIntrinsicContentSize];
 
         } else if ([keyPath isEqualToString:NSStringFromSelector(@selector(tag))]) {
-          buttonView.tag = [newValue integerValue];
+          button.tag = [newValue integerValue];
 
         } else if ([keyPath isEqualToString:NSStringFromSelector(@selector(tintColor))]) {
-          buttonView.tintColor = newValue;
-          if ([buttonView isKindOfClass:[UIButton class]]) {
-            [self->_defaultBuilder updateTitleColorForButton:((UIButton *)buttonView)
-                                                    withItem:object];
-          }
+          button.tintColor = newValue;
+          [self->_defaultBuilder updateTitleColorForButton:button withItem:object];
 
         } else if ([keyPath isEqualToString:NSStringFromSelector(@selector(title))]) {
-          if ([buttonView isKindOfClass:[UIButton class]]) {
-            [((UIButton *)buttonView) setTitle:newValue forState:UIControlStateNormal];
-            [self invalidateIntrinsicContentSize];
-          }
+          [button setTitle:newValue forState:UIControlStateNormal];
+          [self invalidateIntrinsicContentSize];
 
         } else {
           NSLog(@"Unknown key path notification received by %@ for %@.",

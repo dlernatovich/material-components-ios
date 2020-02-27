@@ -14,7 +14,6 @@
 
 #import "MaterialSnapshot.h"
 
-#import "MaterialAvailability.h"
 #import "MaterialBottomAppBar.h"
 
 @interface MDCBottomAppBarSnapshotTests : MDCSnapshotTestCase
@@ -156,7 +155,7 @@
 }
 
 - (void)testDynamicColorSupportOniOS13AndAbove {
-#if MDC_AVAILABLE_SDK_IOS(13_0)
+#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
   if (@available(iOS 13.0, *)) {
     // Given
     UIColor *barTintDynamicColor =
@@ -189,7 +188,7 @@
         [self.appBar mdc_addToBackgroundViewWithInsets:UIEdgeInsetsMake(50, 50, 50, 50)];
     [self snapshotVerifyViewForIOS13:snapshotView];
   }
-#endif  // MDC_AVAILABLE_SDK_IOS(13_0)
+#endif
 }
 
 - (void)testIntrinsicHeight {

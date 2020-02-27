@@ -19,19 +19,11 @@
 #import "MDCTextControlColorViewModel.h"
 #import "MDCTextControlLabelAnimation.h"
 #import "MDCTextControlLabelBehavior.h"
-#import "MDCTextControlLabelPosition.h"
+#import "MDCTextControlLabelState.h"
 #import "MDCTextControlState.h"
 #import "MDCTextControlVerticalPositioningReference.h"
 
-UIFont *_Nonnull MDCTextControlDefaultUITextFieldFont(void);
-
-CGFloat MDCTextControlPaddingValueWithMinimumPadding(CGFloat minimumPadding,
-                                                     CGFloat maximumPadding,
-                                                     CGFloat density);
-
-CGFloat MDCTextControlNormalizeDensity(CGFloat density);
-
-FOUNDATION_EXTERN const CGFloat kMDCTextControlDefaultAnimationDuration;
+static const CGFloat kMDCTextControlDefaultAnimationDuration = (CGFloat)0.15;
 
 @protocol MDCTextControlStyle;
 
@@ -51,11 +43,11 @@ FOUNDATION_EXTERN const CGFloat kMDCTextControlDefaultAnimationDuration;
 @property(nonatomic, assign, readonly) MDCTextControlState textControlState;
 
 /**
- Describes the current MDCTextControlLabelPosition of the contained input view. This
+ Describes the current MDCTextControlLabelState of the contained input view. This
  value is affected by things like the view's @c textControlState, its @c labelBehavior, and the
  text of the floating label.
  */
-@property(nonatomic, assign, readonly) MDCTextControlLabelPosition labelPosition;
+@property(nonatomic, assign, readonly) MDCTextControlLabelState labelState;
 
 /**
  The value for the label frame that should be used for style application. While style application
@@ -153,7 +145,7 @@ FOUNDATION_EXTERN const CGFloat kMDCTextControlDefaultAnimationDuration;
  The number of rows of text the MDCTextControl shows at one time. For textfields, this will always
  be 1. For other views it can be more than that.
  */
-@property(nonatomic, assign, readonly) CGFloat numberOfLinesOfVisibleText;
+@property(nonatomic, assign, readonly) CGFloat numberOfVisibleTextRows;
 
 @end
 

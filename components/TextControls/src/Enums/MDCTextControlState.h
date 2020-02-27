@@ -34,5 +34,3 @@ typedef NS_ENUM(NSInteger, MDCTextControlState) {
    */
   MDCTextControlStateDisabled,
 };
-
-MDCTextControlState MDCTextControlStateWith(BOOL isEnabled, BOOL isEditing);

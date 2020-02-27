@@ -16,7 +16,7 @@
 
 #import "../../src/private/MDCBottomNavigationBar+Private.h"
 #import "../../src/private/MDCBottomNavigationItemView.h"
-#import "MaterialAvailability.h"
+#include "MDCAvailability.h"
 #import "MaterialBottomNavigation.h"
 #import "MaterialPalettes.h"
 #import "MaterialShadowElevations.h"
@@ -893,38 +893,5 @@
   }
 }
 #endif  // MDC_AVAILABLE_SDK_IOS(13_0)
-
-/**
-Tests the @c itemsHorizontalPadding property
- */
-- (void)testItemsHorizontalPaddingProperty {
-  // Given
-  NSString *title = @"Title";
-  UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:title image:nil tag:0];
-  self.bottomNavBar.items = @[ item ];
-  self.bottomNavBar.frame = CGRectMake(0, 0, 350, 125);
-  [self.bottomNavBar sizeToFit];
-
-  // When
-  [self.bottomNavBar setNeedsLayout];
-  [self.bottomNavBar layoutIfNeeded];
-
-  MDCBottomNavigationItemView *itemView = [self.bottomNavBar.itemViews firstObject];
-  CGRect expectedItemViewFrameWithDefaultItemsHorizontalPadding =
-      CGRectInset(self.bottomNavBar.frame, 12, 0);
-  CGRect actualItemViewFrameWithDefaultItemsHorizontalPadding = itemView.frame;
-
-  self.bottomNavBar.itemsHorizontalPadding = 0;
-  [self.bottomNavBar setNeedsLayout];
-  [self.bottomNavBar layoutIfNeeded];
-  CGRect expectedItemViewFrameWithZeroItemsHorizontalPadding = self.bottomNavBar.frame;
-  CGRect actualItemViewFrameWithZeroItemsHorizontalPadding = itemView.frame;
-
-  // Then
-  XCTAssertTrue(CGRectEqualToRect(expectedItemViewFrameWithDefaultItemsHorizontalPadding,
-                                  actualItemViewFrameWithDefaultItemsHorizontalPadding));
-  XCTAssertTrue(CGRectEqualToRect(expectedItemViewFrameWithZeroItemsHorizontalPadding,
-                                  actualItemViewFrameWithZeroItemsHorizontalPadding));
-}
 
 @end

@@ -36,7 +36,6 @@ mdc_public_objc_library(
         "UIKit",
     ],
     deps = [
-        "//components/Availability",
         "//components/Typography",
         "//components/private/Math",
         "@material_text_accessibility_ios//:MDFTextAccessibility",
@@ -77,9 +76,6 @@ mdc_objc_library(
     hdrs = native.glob(["src/private/*.h"]),
     includes = ["src/private"],
     visibility = ["//visibility:private"],
-    deps = [
-        "//components/Availability",
-    ],
 )
 
 mdc_examples_objc_library(

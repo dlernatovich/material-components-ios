@@ -69,6 +69,17 @@
 @property(nonatomic, nullable, strong) UIColor *floatingPlaceholderErrorActiveColor;
 
 /**
+ The error color of the border of the input field while being in edit mode.
+ The color applied to the placeholder when floating and the text field is first responder and is in
+ the error state.
+
+ Only relevent when floatingEnabled is true.
+
+ Default is errorColor.
+ */
+@property(nonatomic, nullable, strong) UIColor *floatingPlaceholderErrorInactiveColor;
+
+/**
  When the placeholder floats up, constraints are created that use this value for constants.
  */
 @property(nonatomic, readonly) UIOffset floatingPlaceholderOffset;

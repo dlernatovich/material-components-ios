@@ -14,12 +14,12 @@
 
 #import <XCTest/XCTest.h>
 
-#import "MaterialAvailability.h"
-#import "MaterialBanner+Theming.h"
+#include "MDCAvailability.h"
 #import "MaterialBanner.h"
-#import "MaterialContainerScheme.h"
-#import "MaterialMath.h"
+#import "MaterialBanner+Theming.h"
 #import "UIColor+MaterialDynamic.h"
+#import "MaterialMath.h"
+#import "MaterialContainerScheme.h"
 
 // The opacity value applied to text view.
 static CGFloat const kTextViewOpacity = (CGFloat)0.87;

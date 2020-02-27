@@ -20,7 +20,7 @@
 @implementation MDCTextControlLabelAnimation
 
 + (void)animateLabel:(nonnull UILabel *)label
-                 state:(MDCTextControlLabelPosition)labelPosition
+                 state:(MDCTextControlLabelState)labelState
       normalLabelFrame:(CGRect)normalLabelFrame
     floatingLabelFrame:(CGRect)floatingLabelFrame
             normalFont:(nonnull UIFont *)normalFont
@@ -37,7 +37,7 @@
 
   UIFont *targetFont;
   CGRect targetFrame;
-  if (labelPosition == MDCTextControlLabelPositionFloating) {
+  if (labelState == MDCTextControlLabelStateFloating) {
     targetFont = floatingFont;
     targetFrame = floatingLabelFrame;
   } else {

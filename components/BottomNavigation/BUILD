@@ -60,7 +60,6 @@ mdc_objc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "//components/Availability",
         "//components/Elevation",
         "//components/Ink",
         "//components/Palettes",
@@ -127,7 +126,6 @@ mdc_examples_objc_library(
     deps = [
         ":BottomNavigation",
         ":Theming",
-        "//components/Availability",
         "//components/Palettes",
         "//components/schemes/Color",
         "//components/schemes/Container",
@@ -172,7 +170,6 @@ mdc_objc_library(
         ":BottomNavigation",
         ":Theming",
         ":privateHeaders",
-        "//components/Availability",
         "//components/Typography",
     ],
 )

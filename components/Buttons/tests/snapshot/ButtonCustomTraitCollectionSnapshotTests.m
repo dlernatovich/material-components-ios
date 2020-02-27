@@ -17,10 +17,10 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKit.h>
 
-#import "MaterialAvailability.h"
+#include "MDCAvailability.h"
 #import "MaterialButtons.h"
-#import "MaterialColor.h"
 #import "MaterialTypography.h"
+#import "MaterialColor.h"
 
 /** A @c MDCButton test fake to override the @c traitCollection to test for dynamic type. */
 @interface ButtonDynamicTypeSnapshotTestFakeButton : MDCButton

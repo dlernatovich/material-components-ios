@@ -193,7 +193,6 @@ mdc_snapshot_objc_library(
     deps = [
         ":Buttons",
         ":Theming",
-        "//components/Availability",
     ],
 )
 

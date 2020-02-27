@@ -14,7 +14,6 @@
 
 #import <XCTest/XCTest.h>
 
-#import "MaterialAvailability.h"
 #import "MaterialTextControls+OutlinedTextFields.h"
 
 @interface MDCOutlinedTextFieldTests : XCTestCase
@@ -28,19 +27,13 @@
   // Given
   CGRect textFieldFrame = CGRectMake(0, 0, 130, 40);
   MDCOutlinedTextField *textField = [[MDCOutlinedTextField alloc] initWithFrame:textFieldFrame];
-  UIColor *defaultOutlineColor = UIColor.blackColor;
-#if MDC_AVAILABLE_SDK_IOS(13_0)
-  if (@available(iOS 13.0, *)) {
-    defaultOutlineColor = UIColor.labelColor;
-  }
-#endif  // MDC_AVAILABLE_SDK_IOS(13_0)
 
   // Then
-  XCTAssertEqualObjects(defaultOutlineColor,
+  XCTAssertEqualObjects([UIColor blackColor],
                         [textField outlineColorForState:MDCTextControlStateNormal]);
-  XCTAssertEqualObjects(defaultOutlineColor,
+  XCTAssertEqualObjects([UIColor blackColor],
                         [textField outlineColorForState:MDCTextControlStateEditing]);
-  XCTAssertEqualObjects([defaultOutlineColor colorWithAlphaComponent:(CGFloat)0.60],
+  XCTAssertEqualObjects([[UIColor blackColor] colorWithAlphaComponent:(CGFloat)0.60],
                         [textField outlineColorForState:MDCTextControlStateDisabled]);
 }
 
@@ -48,9 +41,9 @@
   // Given
   CGRect textFieldFrame = CGRectMake(0, 0, 130, 40);
   MDCOutlinedTextField *textField = [[MDCOutlinedTextField alloc] initWithFrame:textFieldFrame];
-  UIColor *outlineColorNormal = UIColor.blueColor;
-  UIColor *outlineColorEditing = UIColor.greenColor;
-  UIColor *outlineColorDisabled = UIColor.purpleColor;
+  UIColor *outlineColorNormal = [UIColor blueColor];
+  UIColor *outlineColorEditing = [UIColor greenColor];
+  UIColor *outlineColorDisabled = [UIColor purpleColor];
 
   // When
   [textField setOutlineColor:outlineColorNormal forState:MDCTextControlStateNormal];

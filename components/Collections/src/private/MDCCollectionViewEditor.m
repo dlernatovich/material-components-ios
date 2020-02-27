@@ -15,7 +15,6 @@
 #import "MDCCollectionViewEditor.h"
 
 #import "MDCCollectionViewEditingDelegate.h"
-#import "MaterialAvailability.h"
 #import "MaterialShadowLayer.h"
 
 #include <tgmath.h>
@@ -59,10 +58,10 @@ typedef NS_ENUM(NSInteger, MDCAutoscrollPanningDirection) {
 @interface MDCCollectionViewEditor () <UIGestureRecognizerDelegate>
 @end
 
-#if MDC_AVAILABLE_SDK_IOS(10_0)
+#if defined(__IPHONE_10_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0)
 @interface MDCCollectionViewEditor () <CAAnimationDelegate>
 @end
-#endif  // MDC_AVAILABLE_SDK_IOS(10_0)
+#endif
 
 @implementation MDCCollectionViewEditor {
   UILongPressGestureRecognizer *_longPressGestureRecognizer;

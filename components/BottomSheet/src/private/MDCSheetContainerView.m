@@ -18,12 +18,9 @@
 #import "MDCSheetBehavior.h"
 #import "MaterialKeyboardWatcher.h"
 
-/** KVO key for monitoring the content size for the content view if it is a scrollview. */
+// KVO key for monitoring the content size for the content view if it is a scrollview.
 static NSString *kContentSizeKey = nil;
-/** KVO key for monitoring the content inset for the content view if it is a scrollview. */
-static NSString *kContentInsetKey = nil;
-/** KVO context unique to this class. */
-static void *kObservingContext = &kObservingContext;
+static void *kContentSizeContext = &kContentSizeContext;
 
 // We add an extra padding to the sheet height, so that if the user swipes upwards, fast, the
 // bounce does not reveal a gap between the sheet and the bottom of the screen.
@@ -50,7 +47,6 @@ static const CGFloat kSheetBounceBuffer = 150;
     return;
   }
   kContentSizeKey = NSStringFromSelector(@selector(contentSize));
-  kContentInsetKey = NSStringFromSelector(@selector(contentInset));
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -87,11 +83,7 @@ static const CGFloat kSheetBounceBuffer = 150;
     [scrollView addObserver:self
                  forKeyPath:kContentSizeKey
                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                    context:kObservingContext];
-    [scrollView addObserver:self
-                 forKeyPath:kContentInsetKey
-                    options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                    context:kObservingContext];
+                    context:kContentSizeContext];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(voiceOverStatusDidChange)
                                                  name:UIAccessibilityVoiceOverStatusChanged
@@ -124,7 +116,6 @@ static const CGFloat kSheetBounceBuffer = 150;
 
 - (void)dealloc {
   [self.sheet.scrollView removeObserver:self forKeyPath:kContentSizeKey];
-  [self.sheet.scrollView removeObserver:self forKeyPath:kContentInsetKey];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -187,15 +178,7 @@ static const CGFloat kSheetBounceBuffer = 150;
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-  // As long as this class added the KVO observation, it doesn't matter which of the two properties
-  // has been updated. A change in either warrants repositioning the sheet.
-  // If contentSize was updated, then there's likely more or less content to see so it's worth
-  // repositioning.  If contentInset was updated, then the visible content has changed and the
-  // sheet should reposition to keep it visible.
-  // Notably, ActionSheet changes contentInset when it calculates its header height. If contentInset
-  // were not observed, then the sheet wouldn't be able to fully show the contentSize portion of
-  // that view.
-  if (context == kObservingContext) {
+  if ([keyPath isEqualToString:kContentSizeKey] && context == kContentSizeContext) {
     NSValue *oldValue = change[NSKeyValueChangeOldKey];
     NSValue *newValue = change[NSKeyValueChangeNewKey];
     if (self.window && !self.isDragging && ![oldValue isEqual:newValue]) {

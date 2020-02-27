@@ -29,7 +29,6 @@ mdc_public_objc_library(
         "CoreGraphics",
     ],
     deps = [
-        "//components/Availability",
         "//components/Ink",
         "//components/Ripple",
         "//components/ShadowElevations",

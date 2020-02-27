@@ -19,7 +19,6 @@
 
 #import "MDCNumericValueLabel.h"
 #import "MDCThumbView.h"
-#import "MaterialAvailability.h"
 #import "MaterialInk.h"
 #import "MaterialMath.h"
 #import "MaterialRipple.h"
@@ -168,10 +167,10 @@ static inline CGFloat DistanceFromPointToPoint(CGPoint point1, CGPoint point2) {
   return MDCHypot(point1.x - point2.x, point1.y - point2.y);
 }
 
-#if MDC_AVAILABLE_SDK_IOS(10_0)
+#if defined(__IPHONE_10_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0)
 @interface MDCThumbTrack () <CAAnimationDelegate>
 @end
-#endif  // MDC_AVAILABLE_SDK_IOS(10_0)
+#endif
 
 @interface MDCThumbTrack () <MDCInkTouchControllerDelegate>
 @property(nonatomic, strong, nullable) MDCRippleView *rippleView;

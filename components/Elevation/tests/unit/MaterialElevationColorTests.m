@@ -14,7 +14,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "MaterialAvailability.h"
+#include "MDCAvailability.h"
 #import "MaterialElevation.h"
 #import "UIColor+MaterialDynamic.h"
 
